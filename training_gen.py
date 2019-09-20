@@ -94,13 +94,23 @@ def show_digits(arr):
 	plt.imshow(arr, cmap = "Greys")
 	plt.show()	
 
-'''
-for i in range(1):
-	dig = create_digit_sequence("19941220", 1000, 3, 10)
-	show_digits(dig)
-'''
-
-
 for i in range(10):
 	dig = create_digit_sequence("19941220", 1000, 3, 10)
 	show_digits(dig)
+
+
+# generate random digits sequence
+def digits_generator(num_dig):
+	numbers = np.random.randint(10, size = num_dig)
+	res = ''.join([str(x) for x in numbers])
+	return res
+
+def images_generator(num_dig, num_img, image_width, min_spacing, max_spacing):
+	digits = digits_generator(num_dig)
+	imgs = []
+	for i in range(num_img):
+		img = create_digit_sequence(digits, image_width, min_spacing, max_spacing)
+		imgs.append(img)
+
+	# imgs is a list of np.array, len(imgs) = num_img, imgs should be saved as x_train
+	return imgs
