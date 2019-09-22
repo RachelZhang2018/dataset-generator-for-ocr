@@ -76,7 +76,6 @@ def create_digit_sequence(number, image_width, min_spacing, max_spacing):
 
 	# convert new image to array
 	res = np.asarray(new_img)
-	show_digits(res)
 
 	return res
 
@@ -91,36 +90,26 @@ for i in range(10):
 	show_digits(dig)
 '''
 
-# generate random digits sequence and save as csv file
-def digits_generator(len_dig):
-	numbers = np.random.randint(10, size = len_dig)
-	res = ''.join([str(x) for x in numbers])
-	return res
 
-def images_generator(len_dig, num_img, image_width, min_spacing, max_spacing):
-	name = "train_len" + str(len_dig)
-	nameLab = "lable_len" + str(len_dig)
+
+def images_generator(digits, num_img, image_width, min_spacing, max_spacing):
+	name = "train_" + digits
+	nameLab = "lable_" + digits
 	f = open('data/{0}.csv'.format(name), 'wb')
 	f_l = open('data/{0}.csv'.format(nameLab), 'w')
 
-	
 	for i in range(num_img):
-		digits = digits_generator(len_dig)
 		img = create_digit_sequence(digits, image_width, min_spacing, max_spacing)
-		img = img.reshape((1,-1))
+
+		# show the first 5 generated images
+		if i < 5:
+			show_digits(img)
+
+		img = img.reshape((1, -1))
 		np.savetxt(f, img, fmt='%i', delimiter = ",")
 		np.savetxt(f_l, [digits], fmt='%s')
-
 	f.close()
 	f_l.close()
-	
-	'''
-	# test: read labels
-	with open('data/{0}.csv'.format(nameLab)) as csvfile:
-		reader = csv.reader(csvfile)
-		for row in reader:
-			print(row)
-	'''
 
 dirName = 'data'
 if not os.path.exists(dirName):
