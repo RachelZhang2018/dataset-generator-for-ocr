@@ -2,22 +2,51 @@
 Generate training dataset for OCR system using images of handwritten digits form MNIST database.
 
 ## Usage
-After cloning this repository to local machine, run the following commands: 
 
-` cd ./training-dataset-for-ocr`
+Check if Python environment is configured:
 
-`./venv/bin/activate`
+~~~
+$ python3 --version
+$ pip3 --version
+$ virtualenv --version
+~~~
 
-`(venv) $ pip install --upgrade pip`
+If the packages are not installed, install them:
 
-`(venv) $ pip install --requirement requirements.txt`
+~~~
+$ sudo apt update
+$ sudo apt install python3-dev python3-pip
+$ sudo pip3 install -U virtualenv
+~~~
 
-`(venv) $ python main.py [-h] [-op OP] [-seq SEQ] [-l LEN] [-nd ND] [-ni NI] [-w W] [-min MIN] [-max MAX]`
+After cloning the repository to local machine, create a virtual environment: 
 
+~~~
+$ cd ./dataset-generator-for-ocr
+$ virtualenv ./myvenv
+~~~
+
+Activate the virtual environment:
+
+`$ source ./myvenv/bin/activate`
+
+Then we can configure the environment:
+
+~~~
+(myvenv) $ pip install --upgrade pip
+
+(myvenv) $ pip install --requirement requirements.txt
+
+(myvenv) $ python main.py [-h] [-op OP] [-seq SEQ] [-l LEN] [-nd ND] [-ni NI] [-w W] [-min MIN] [-max MAX]
+~~~
+
+Exit the virtual environment:
+
+`(myvenv) $ deactivate`
 
 There are two options to generate training dataset for OCR system.
 
-### Images Generator
+### 1. Images Generator
 Generate images of a specific digital sequence.
 
 command:
@@ -36,7 +65,7 @@ arguments:
 
 The generated images will be saved in a ".csv" file under path "/data" with the specific sequence in the file name. The corresponding labels of each image will be saved in the same folder. Each created image is saved as an 1-d array. When reading it from the csv file, a `numpy.reshape((-1, image_width))` function should be performed to transfer it to a 2-d array. 5 sampled images will be shown for visualization purpose.
 
-### Dataset Generator
+### 2. Dataset Generator
 Generate `[-nd ND]` digital sequences with length `[-l LEN]`. `[-ni NI]` images are created for each sequence.
 
 command:
