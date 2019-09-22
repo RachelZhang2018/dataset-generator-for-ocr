@@ -6,6 +6,8 @@ from keras.datasets import mnist
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+import os
+import csv
 
 SIZE = 28
 
@@ -93,24 +95,40 @@ def create_digit_sequence(number, image_width, min_spacing, max_spacing):
 def show_digits(arr):
 	plt.imshow(arr, cmap = "Greys")
 	plt.show()	
-
+'''
+# test
 for i in range(10):
 	dig = create_digit_sequence("19941220", 1000, 3, 10)
 	show_digits(dig)
+'''
 
-
-# generate random digits sequence
+# generate random digits sequence and save as csv file
 def digits_generator(num_dig):
 	numbers = np.random.randint(10, size = num_dig)
 	res = ''.join([str(x) for x in numbers])
 	return res
 
 def images_generator(num_dig, num_img, image_width, min_spacing, max_spacing):
-	digits = digits_generator(num_dig)
-	imgs = []
+	name = "train_len" + str(num_dig)
+	f = open('data/{0}.csv'.format(name), 'wb')
+	
 	for i in range(num_img):
+		digits = digits_generator(num_dig)
 		img = create_digit_sequence(digits, image_width, min_spacing, max_spacing)
-		imgs.append(img)
+		img = img.reshape((1,-1))
+		np.savetxt(f, img, fmt='%i', delimiter = ",")
+	f.close()
+	
 
-	# imgs is a list of np.array, len(imgs) = num_img, imgs should be saved as x_train
-	return imgs
+dirName = 'data'
+if not os.path.exists(dirName):
+	os.mkdir(dirName)
+
+images_generator(5, 1, 200, 5, 10)
+
+'''
+# test
+myFile = np.genfromtxt('data/train_len5.csv', delimiter=',')
+arr = myFile.reshape((-1, 200))
+show_digits(arr)
+'''
