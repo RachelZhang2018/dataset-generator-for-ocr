@@ -110,6 +110,7 @@ def images_generator(digits, num_img, image_width, min_spacing, max_spacing):
 		np.savetxt(f_l, [digits], fmt='%s')
 	f.close()
 	f_l.close()
+	print("The task is completed successfully.")
 
 dirName = 'data'
 if not os.path.exists(dirName):

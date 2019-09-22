@@ -9,13 +9,13 @@ parser.add_argument('-op', '--op', default='images', type=str,
 parser.add_argument('-seq', '--seq', default='12345', type=str,
                     help='provide a sequence of digits (default: 12345)')
 parser.add_argument('-l', '-len', '--len', default=5, type=int,
-                    help='provide length of digital sequence (default: 10)')
+                    help='provide length of digital sequence (default: 5)')
 parser.add_argument('-nd', '--nd', default=5, type=int,
                     help='provide number of digital sequences (default: 5)')
 parser.add_argument('-ni', '--ni', default=1000, type=int,
                     help='provide number of images (default: 1000)')
 parser.add_argument('-w', '--w', default=150, type=int,
-                    help='provide number of images (default: 300)')
+                    help='provide width of generated images (default: 150)')
 parser.add_argument('-min', '--min', default=0, type=int,
                     help='provide minimum spacing between digits (default: 0)')
 parser.add_argument('-max', '--max', default=5, type=int,

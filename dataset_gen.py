@@ -27,6 +27,7 @@ def dataset_generator(len_dig, num_dig, num_img, image_width, min_spacing, max_s
 
 	f.close()
 	f_l.close()
+	print("The task is completed successfully.")
 	
 	'''
 	# test: read labels
