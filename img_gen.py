@@ -62,7 +62,7 @@ def create_digit_sequence(number, image_width, min_spacing, max_spacing):
 		# a filter to find the indices of images belonging to class i
 		fil = y_train[:, class_ind] == 1
 		indices = fil.nonzero()[0]
-		# find a random image from digits belonging to class i
+		# sample a random image from class i
 		num_img = indices.size
 		rand = np.random.randint(0, num_img)
 		rand_img_index = indices[rand]
@@ -70,7 +70,7 @@ def create_digit_sequence(number, image_width, min_spacing, max_spacing):
 		# convert array to image obejct
 		arr2img = Image.fromarray(rand_img, mode='L')
 		img = arr2img.resize((wsize, hsize), Image.NEAREST)
-		# paste the image to the generated new image
+		# paste the image to the generated image
 		new_img.paste(img, (j, 0))
 		j = j + wsize + spacing_size
 
@@ -83,16 +83,25 @@ def create_digit_sequence(number, image_width, min_spacing, max_spacing):
 def show_digits(arr):
 	plt.imshow(arr, cmap = "Greys")
 	plt.show()	
-'''
-# test
-for i in range(10):
-	dig = create_digit_sequence("19941220", 1000, 3, 10)
-	show_digits(dig)
-'''
-
 
 
 def images_generator(digits, num_img, image_width, min_spacing, max_spacing):
+	'''
+	A function to generate images with a specific digital sequence given,
+	and save images as arrays in a csv file with corresponding labels.
+	Parameters
+	----------
+	digits: str
+	A string representing the digits, e.g. "12345"
+	num_img: int
+	Number of generated images.
+	image_width: int
+	The image width (in pixel).
+	min_spacing: int
+	The minimum spacing between digits (in pixel).
+	max_spacing: int
+	The maximum spacing between digits (in pixel).
+	'''
 	name = "train_" + digits
 	nameLab = "lable_" + digits
 	f = open('data/{0}.csv'.format(name), 'wb')
@@ -115,8 +124,6 @@ def images_generator(digits, num_img, image_width, min_spacing, max_spacing):
 dirName = 'data'
 if not os.path.exists(dirName):
 	os.mkdir(dirName)
-
-# images_generator(len_dig = 5, num_img = 5, image_width = 200, min_spacing = 5, max_spacing = 10)
 
 '''
 # test

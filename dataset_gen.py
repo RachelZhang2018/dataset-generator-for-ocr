@@ -1,13 +1,39 @@
 import img_gen
 import numpy as np
 
-# generate random digits sequence and save as csv file
 def digits_generator(len_dig):
+	'''
+	A function to generate random digits sequence given the length of the sequence.
+	Returns a string representing the sequence.
+	Parameters
+	----------
+	len_dig: int
+	The length of the sequence.
+	'''
 	numbers = np.random.randint(10, size = len_dig)
 	res = ''.join([str(x) for x in numbers])
 	return res
 
+# generate images and save as csv file with corresponding labels
 def dataset_generator(len_dig, num_dig, num_img, image_width, min_spacing, max_spacing):
+	'''
+	A function to generate images with the length of digital sequence given,
+	and save images as arrays in a csv file with corresponding labels.
+	Parameters
+	----------
+	len_dig: int
+	The length of the sequence.
+	num_dig: int
+	The number of sequences with the fixed length.
+	num_img: int
+	The number of images generated for one unique sequence.
+	image_width: int
+	The image width (in pixel).
+	min_spacing: int
+	The minimum spacing between digits (in pixel).
+	max_spacing: int
+	The maximum spacing between digits (in pixel).
+	'''
 	name = "train_len" + str(len_dig)
 	nameLab = "lable_len" + str(len_dig)
 	f = open('data/{0}.csv'.format(name), 'wb')
